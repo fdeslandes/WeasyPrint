@@ -16,7 +16,6 @@ from __future__ import division
 import pyphen
 import cffi
 import cairocffi as cairo
-import logging
 
 from .compat import basestring
 
@@ -533,7 +532,6 @@ def split_first_line(text, style, hinting, max_width, line_width):
     # If we can break words and the first line is too long
     if overflow_wrap == 'break-word' and space < 0:
         if hyphenated:
-            logging.warn(new_first_line)
             # Is it really OK to remove hyphenation for word-break ?
             new_first_line = (new_first_line.rstrip(new_first_line[-(len(style.hyphenate_character)):]))
             if second_line is not None:
@@ -541,7 +539,6 @@ def split_first_line(text, style, hinting, max_width, line_width):
                 second_part = utf8_slice(text, slice(second_line_index, None))
                 new_first_line += second_part
                 
-            logging.warn(new_first_line)
             hyphenated = False
         
         # TODO: Modify code to preserve W3C condition:
